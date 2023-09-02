@@ -1,3 +1,7 @@
 transformers
 ipykernel
 tensorflow
+datasets
+soundfile
+librosa
+ffmpeg

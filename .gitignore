@@ -2,3 +2,4 @@ src/venv/
 **/venv/*
 .vscode
 src/models/whisper-medium.en/
+.cache/

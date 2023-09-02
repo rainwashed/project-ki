@@ -1,0 +1,3 @@
+[submodule "kobold"]
+	path = kobold
+	url = git@github.com:KoboldAI/KoboldAI-Client.git

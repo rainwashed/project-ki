@@ -1,6 +1,6 @@
 transformers
 ipykernel
-tensorflow
+tensorflow==2.13.0
 datasets
 soundfile
 librosa

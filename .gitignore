@@ -3,3 +3,4 @@ src/venv/
 .vscode
 src/models/whisper-medium.en/
 .cache/
+kobold/

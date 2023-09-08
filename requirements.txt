@@ -5,3 +5,7 @@ datasets
 soundfile
 librosa
 ffmpeg
+python-socketio
+asyncio
+aiohttp
+jurigged

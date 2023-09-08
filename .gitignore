@@ -1,6 +1,7 @@
 src/venv/
 **/venv/*
 .vscode
-src/models/whisper-medium.en/
+src/models/whisper-*/
 .cache/
 kobold/
+/**/__pycache__/

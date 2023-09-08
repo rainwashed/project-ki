@@ -1,3 +1,3 @@
-from setuptools import setup, find_packages
+from setuptools import find_packages, setup
 
-setup(name="project_ki", packages=find_packages)
+setup(name="src", packages=find_packages())

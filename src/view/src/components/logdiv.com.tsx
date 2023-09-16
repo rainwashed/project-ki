@@ -8,9 +8,11 @@ function LogContainer() {
 
   useEffect(() => {
     sio.on("log_message", (message) => {
+      console.log(logMessages);
+
       setLogMessages([...logMessages, message]);
     });
-  }, []);
+  }, [logMessages]);
 
   return (
     <div
@@ -19,13 +21,11 @@ function LogContainer() {
       }}
     >
       <ul>
-        {logMessages.map((message, i) => {
-          return (
-            <li key={i}>
-              <p>{message}</p>
-            </li>
-          );
-        })}
+        {logMessages.slice().map((message, i) => (
+          <li key={i}>
+            <p>{message}</p>
+          </li>
+        ))}
       </ul>
     </div>
   );

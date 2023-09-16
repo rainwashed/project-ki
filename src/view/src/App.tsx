@@ -1,14 +1,33 @@
-import { useEffect } from "react";
-import { sio } from "./config";
+import { useEffect, useState } from "react";
+import { customTheme, sio } from "./config";
 import { ChakraProvider } from "@chakra-ui/react";
 import LogContainer from "./components/logdiv.com";
+
+function SendMessage() {
+  const [input, setInput] = useState("");
+
+  return (
+    <div>
+      <input
+        type="text"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+      ></input>
+      <button
+        onClick={() => {
+          sio.emit("log", input);
+          setInput("");
+        }}
+      >
+        Send
+      </button>
+    </div>
+  );
+}
 
 function App() {
   useEffect(() => {
     sio.connect();
-
-    sio.on("pong_test", () => alert("pong!"));
-
     return () => {
       sio.disconnect();
     };
@@ -32,13 +51,14 @@ function App() {
         Model Test
       </button>
       <LogContainer />
+      <SendMessage />
     </div>
   );
 }
 
 function Wrapper() {
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={customTheme}>
       <App />
     </ChakraProvider>
   );

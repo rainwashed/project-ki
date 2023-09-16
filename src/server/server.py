@@ -18,6 +18,12 @@ async def model_test(sid, data):
 
     return f"Hello there! Status: {status} within {time}s"
 
+@sio.on("log")
+async def log(*args):
+    print(args)
+
+    await sio.emit("log_message", args[1])
+
 app = web.Application()
 
 sio.attach(app)

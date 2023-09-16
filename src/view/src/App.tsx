@@ -7,6 +7,8 @@ function App() {
   useEffect(() => {
     sio.connect();
 
+    sio.on("pong_test", () => alert("pong!"));
+
     return () => {
       sio.disconnect();
     };

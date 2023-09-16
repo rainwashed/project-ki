@@ -16,7 +16,12 @@ log_icons = {
     LogTypes.success: "✅",
     LogTypes.unknown: "❓"
 }
-def log(module: str, message: str, type: LogTypes = LogTypes.info):
+
+lock: bool = False
+async def log(module: str, message: str, type: LogTypes = LogTypes.info):
     s: str = f"[{now_time()}, {log_icons[type]}] - {message} ({module})"
 
-    # await sio.emit("log_message", s)
+    if not lock:
+        lock = True
+        await sio.emit("log_message", s)
+        lock = False

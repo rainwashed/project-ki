@@ -11,10 +11,10 @@ def disconnect(sid):
     print(f"Lost server connection from {sid}.")
 
 @sio.on("model_test")
-def model_test(sid, data):
+async def model_test(sid, data):
     print(sid, data)
 
-    (status, time) = test_audio_recog()
+    (status, time) = await test_audio_recog()
 
     return f"Hello there! Status: {status} within {time}s"
 

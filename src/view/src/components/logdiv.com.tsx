@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { sio } from "../config";
 
+// TODO: Fix socket.io emit calling twice for some reason
+
 function LogContainer() {
   const [logMessages, setLogMessages] = useState<string[]>([]);
 
   useEffect(() => {
-    sio.on("log_event", (message) => {
-      console.log(message);
+    sio.on("log_message", (message) => {
       setLogMessages([...logMessages, message]);
     });
   }, []);
@@ -18,11 +19,13 @@ function LogContainer() {
       }}
     >
       <ul>
-        {logMessages.map((message, index) => (
-          <li key={index}>
-            <p>{message}</p>
-          </li>
-        ))}
+        {logMessages.map((message, i) => {
+          return (
+            <li key={i}>
+              <p>{message}</p>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

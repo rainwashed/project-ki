@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
-import { customTheme, sio } from "./config";
-import { ChakraProvider } from "@chakra-ui/react";
-import LogContainer from "./components/logdiv.com";
+import { sio } from "./config";
+import LogContainer, { log } from "./components/logdiv.com";
+
+import "./styles/root.scss";
+import StatusContainer from "./components/statusdiv.com";
 
 function SendMessage() {
   const [input, setInput] = useState("");
@@ -15,7 +17,7 @@ function SendMessage() {
       ></input>
       <button
         onClick={() => {
-          sio.emit("log", input);
+          log(input, "info");
           setInput("");
         }}
       >
@@ -28,6 +30,12 @@ function SendMessage() {
 function App() {
   useEffect(() => {
     sio.connect();
+
+    log(
+      "Loaded all modules; if this message is visible, successful server connection.",
+      "success"
+    );
+
     return () => {
       sio.disconnect();
     };
@@ -43,14 +51,18 @@ function App() {
               model: "audio_model",
             },
             (response: any) => {
-              alert(response);
+              console.log(response);
             }
           );
         }}
       >
         Model Test
       </button>
-      <LogContainer />
+      <div>
+        <StatusContainer />
+        <LogContainer />
+      </div>
+
       <SendMessage />
     </div>
   );
@@ -58,9 +70,9 @@ function App() {
 
 function Wrapper() {
   return (
-    <ChakraProvider theme={customTheme}>
+    <>
       <App />
-    </ChakraProvider>
+    </>
   );
 }
 

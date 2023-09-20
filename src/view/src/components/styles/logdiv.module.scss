@@ -1,0 +1,34 @@
+@use "../../styles/vars.scss";
+
+.div {
+  padding: 1em;
+  width: 900px;
+  height: 400px;
+
+  background-color: vars.$sectionDivBackgroundColor;
+
+  @include vars.sectionDiv;
+
+  ul {
+    display: flex;
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+    overflow: auto;
+    flex-flow: column nowrap;
+
+    li {
+      margin: 0.3em 0;
+      padding: 0.2em;
+      width: 100%;
+      list-style: none;
+      font-size: 0.75em;
+
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+      p {
+        font-style: italic;
+      }
+    }
+  }
+}

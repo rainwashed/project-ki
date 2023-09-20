@@ -1,34 +1,51 @@
 import { useEffect, useState } from "react";
+import Draggable from "react-draggable";
 import { sio } from "../config";
 
-// TODO: Fix socket.io emit calling twice for some reason
+import style from "./styles/logdiv.module.scss";
+
+// TODO: Implement client-side logging
+
+function log(
+  message: string,
+  level: "info" | "warning" | "success" | "unknown" = "info"
+) {
+  const icon = {
+    info: "ℹ️",
+    warning: "⚠️",
+    success: "✅",
+    unknown: "❓",
+  }[level];
+
+  sio.emit("log", `[${Date.now()}, ${icon}] - ${message} (local)`);
+}
 
 function LogContainer() {
   const [logMessages, setLogMessages] = useState<string[]>([]);
 
   useEffect(() => {
     sio.on("log_message", (message) => {
-      console.log(logMessages);
-
       setLogMessages([...logMessages, message]);
     });
   }, [logMessages]);
 
   return (
-    <div
-      style={{
-        backgroundColor: "red",
-      }}
-    >
-      <ul>
-        {logMessages.slice().map((message, i) => (
-          <li key={i}>
-            <p>{message}</p>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <Draggable>
+      <div className={style["div"]}>
+        {logMessages.length > 0 ? (
+          <ul>
+            {logMessages.slice().map((m, i) => {
+              return <li key={i}>{m}</li>;
+            })}
+          </ul>
+        ) : (
+          <p>No logs yet...</p>
+        )}
+      </div>
+    </Draggable>
   );
 }
 
 export default LogContainer;
+
+export { log };

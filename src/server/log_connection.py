@@ -3,6 +3,7 @@ from enum import Enum
 from time import time as now_time
 from server.vars import sio
 
+
 class LogTypes(Enum):
     info = 0
     warning = 1
@@ -18,6 +19,6 @@ log_icons = {
 }
 
 async def log(module: str, message: str, type: LogTypes = LogTypes.info):
-    s: str = f"[{now_time()}, {log_icons[type]}] - {message} ({module})"
+    s: str = f"[{round(now_time() * 1000)}, {log_icons[type]}] - {message} ({module})"
 
     await sio.emit("log_message", s)

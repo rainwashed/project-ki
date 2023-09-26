@@ -1,6 +1,6 @@
 transformers
 ipykernel
-tensorflow==2.13.0
+# tensorflow==2.13.0
 datasets
 soundfile
 librosa
@@ -9,3 +9,9 @@ python-socketio
 asyncio
 aiohttp
 jurigged
+torch
+torchvision
+torchaudio
+# sudo apt install portaudio19-dev
+pyaudio
+wave

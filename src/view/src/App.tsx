@@ -4,6 +4,7 @@ import LogContainer, { log } from "./components/logdiv.com";
 
 import "./styles/root.scss";
 import StatusContainer from "./components/statusdiv.com";
+import FunctionContainer from "./components/functiondiv.com";
 
 function SendMessage() {
   const [input, setInput] = useState("");
@@ -43,27 +44,11 @@ function App() {
 
   return (
     <div>
-      <button
-        onClick={() => {
-          sio.emit(
-            "model_test",
-            {
-              model: "audio_model",
-            },
-            (response: any) => {
-              console.log(response);
-            }
-          );
-        }}
-      >
-        Model Test
-      </button>
       <div>
         <StatusContainer />
         <LogContainer />
+        <FunctionContainer />
       </div>
-
-      <SendMessage />
     </div>
   );
 }

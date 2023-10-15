@@ -17,13 +17,13 @@ async def audio_recog() -> str:
     if not audioFileExists:
         raise Exception(f"src/cache/{saveFileName} is not present in the cache folder. Did nothing record?")
     
-    processor = WhisperProcessor.from_pretrained("openai/whisper-base.en")
-    model = WhisperForConditionalGeneration.from_pretrained("openai/whisper-base.en")
+    processor = WhisperProcessor.from_pretrained("src/models/whisper-base.en-processor")
+    model = WhisperForConditionalGeneration.from_pretrained("src/models/whisper-base.en-model")
 
     await log(__file__, f"Took {now_time() - start_time}s to load processor and model.")
 
     start_time = now_time()
-    data = convert_sample_rate((load_file(filePath)))
+    data = convert_sample_rate((load_file(filePath)), sr=16000)
 
     await log(__file__, f"Took {now_time() - start_time}s to load and downsample the audio file.")
 
@@ -49,8 +49,8 @@ async def test_audio_recog() -> (bool, int):
     overall_time = now_time()
     start_time = now_time()
 
-    processor = WhisperProcessor.from_pretrained("openai/whisper-base.en")
-    model = WhisperForConditionalGeneration.from_pretrained("openai/whisper-base.en")
+    processor = WhisperProcessor.from_pretrained("src/models/whisper-base.en-processor")
+    model = WhisperForConditionalGeneration.from_pretrained("src/models/whisper-base.en-model")
 
     await log(__file__, f"Took {now_time() - start_time}s to load processor and model.")
 
@@ -70,6 +70,6 @@ async def test_audio_recog() -> (bool, int):
 
     passed: bool = stringified_output == "hello, this is my audio message to be tested with the openai whisper large version 2 model."
     
-    await log(__file__, f"Finished audio recog. in {now_time() - overall_time}s. Status: {passed}", LogTypes.success)
+    await log(__file__, f"Finished audio recog. test in {now_time() - overall_time}s. Status: {passed}", LogTypes.success)
 
     return (passed, now_time() - overall_time)

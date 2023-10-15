@@ -22,12 +22,13 @@ function StatusLog({
   };
 
   return (
-    <div>
+    <div className={style["status_div"]}>
       <div
         style={{
+          marginRight: "0.25em",
           backgroundColor: colors[status],
-          width: "0.25em",
-          height: "0.25em",
+          width: "0.5em",
+          height: "0.5em",
           borderRadius: "50%",
         }}
       ></div>
@@ -46,9 +47,15 @@ function StatusContainer() {
     useState<StatusTypes>("unknown");
 
   useEffect(() => {
+    sio.on("connection", () => {
+      setServerConnectionStatus("good");
+    });
+
     sio.on("disconnect", () => {
       log("Client disconnected from server.", "warning");
       setServerConnectionStatus("bad");
+      setModelSpeechRecognitionStatus("unknown");
+      setModelSpeechGenerationStatus("unknown");
     });
   }, []);
 
@@ -59,17 +66,44 @@ function StatusContainer() {
           <StatusLog
             status={serverConnectionStatus}
             label="Server Connection Status"
-            testFunction={() => {}}
+            testFunction={() => {
+              try {
+                sio.emit("ping", null, () => {
+                  setServerConnectionStatus("good");
+                });
+              } catch (error) {
+                console.error(error);
+                setServerConnectionStatus("bad");
+              }
+            }}
           />
           <StatusLog
             status={modelSpeechRecognitionStatus}
             label="Model Speech Recog. Status"
-            testFunction={() => {}}
+            testFunction={() => {
+              try {
+                sio.emit("model_test-audiorecog", null, (status: boolean) => {
+                  setModelSpeechRecognitionStatus(status ? "good" : "bad");
+                });
+              } catch (error) {
+                console.error(error);
+                setModelSpeechRecognitionStatus("bad");
+              }
+            }}
           />
           <StatusLog
             status={modelSpeechGenerationStatus}
             label="Model Speech Gen. Status"
-            testFunction={() => {}}
+            testFunction={() => {
+              try {
+                sio.emit("model_test-audiogen", null, (status: boolean) => {
+                  setModelSpeechGenerationStatus(status ? "good" : "bad");
+                });
+              } catch (error) {
+                console.error(error);
+                setModelSpeechGenerationStatus("bad");
+              }
+            }}
           />
         </div>
       </div>

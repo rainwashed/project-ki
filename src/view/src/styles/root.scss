@@ -15,3 +15,54 @@ body {
   font-family: "Roboto", Arial, Helvetica, sans-serif;
   overflow: hidden;
 }
+
+button {
+  padding: 0.5em;
+  background-color: rgba(0, 0, 0, 0);
+  color: $textColorPrimary;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  // font-size: 0.75em;
+  cursor: pointer;
+  transition: background 100ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+}
+
+input {
+  padding: 0.5em;
+  padding-left: 1em;
+  background-color: rgba(0, 0, 0, 0);
+  color: $textColorPrimary;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  // font-size: 0.75em;
+  cursor: text;
+  transition: background 100ms cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+}
+
+// div.react-draggable {
+//   transition: transform 150ms cubic-bezier(0.16, 1, 0.3, 1);
+// }
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.5);
+  transition: background-color 250ms cubic-bezier(0.83, 0, 0.17, 1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.7);
+}

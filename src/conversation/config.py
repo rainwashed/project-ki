@@ -1,3 +1,5 @@
-kobold_server_url="http://localhost:5000/api"
-kobold_model="gpt2-large"
-ai_prompt=""""""
+from os import environ as env
+from characterai import PyCAI
+
+caiAuth = "4c1141f5c9fc59f005cde148ff66199604bc428e"
+cai = PyCAI(caiAuth)

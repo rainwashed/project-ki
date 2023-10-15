@@ -9,3 +9,17 @@
 
   @include vars.sectionDiv;
 }
+
+.status_div {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+
+  @include vars.listDiv;
+
+  button {
+    margin-right: 1em;
+    margin-left: auto;
+  }
+}

@@ -11,23 +11,23 @@
 
   ul {
     display: flex;
+    padding-right: 1em;
     width: 100%;
     height: auto;
     max-height: 100%;
     overflow: auto;
     flex-flow: column nowrap;
+    scroll-snap-type: y proximity;
 
     li {
-      margin: 0.3em 0;
-      padding: 0.2em;
-      width: 100%;
-      list-style: none;
-      font-size: 0.75em;
-
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      @include vars.listDiv;
 
       p {
         font-style: italic;
+      }
+
+      &:last-child {
+        scroll-snap-align: end;
       }
     }
   }

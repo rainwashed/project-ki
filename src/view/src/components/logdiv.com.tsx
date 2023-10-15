@@ -48,4 +48,5 @@ function LogContainer() {
 
 export default LogContainer;
 
+// eslint-disable-next-line react-refresh/only-export-components
 export { log };

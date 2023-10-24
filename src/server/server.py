@@ -3,6 +3,8 @@ from aiohttp import web
 from audio.audio_recog import test_audio_recog, audio_recog
 from audio.audio_gen import test_audio_gen, audio_gen
 from audio.record import start_recording
+from conversation.support_functions import ping as llm_ping
+import server.extends
 
 @sio.on("connect")
 def connect(sid, environ, auth):
@@ -64,7 +66,9 @@ async def model_test(sid, data):
 
 @sio.on("model_test-llm")
 async def model_test(sid, data):
-    pass
+    status = llm_ping()
+
+    return status
 
 @sio.on("ping")
 async def ping(*args):
@@ -72,8 +76,6 @@ async def ping(*args):
 
 @sio.on("log")
 async def log(*args):
-    print(args)
-
     await sio.emit("log_message", args[1])
 
 app = web.Application()

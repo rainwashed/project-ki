@@ -1,0 +1,11 @@
+@use "../../styles/vars.scss";
+
+.div {
+  padding: 1em;
+  width: 900px;
+  height: 400px;
+
+  background-color: vars.$sectionDivBackgroundColor;
+
+  @include vars.sectionDiv;
+}

@@ -5,6 +5,7 @@ import LogContainer, { log } from "./components/logdiv.com";
 import "./styles/root.scss";
 import StatusContainer from "./components/statusdiv.com";
 import FunctionContainer from "./components/functiondiv.com";
+import ChatContainer from "./components/chatdiv.com";
 
 function SendMessage() {
   const [input, setInput] = useState("");
@@ -44,10 +45,11 @@ function App() {
 
   return (
     <div>
-      <div>
+      <div className="statuses">
         <StatusContainer />
         <LogContainer />
         <FunctionContainer />
+        <ChatContainer />
       </div>
     </div>
   );

@@ -45,6 +45,7 @@ function StatusContainer() {
     useState<StatusTypes>("unknown");
   const [modelSpeechGenerationStatus, setModelSpeechGenerationStatus] =
     useState<StatusTypes>("unknown");
+  const [llmStatus, setLlmStatus] = useState<StatusTypes>("unknown");
 
   useEffect(() => {
     sio.on("connection", () => {
@@ -102,6 +103,20 @@ function StatusContainer() {
               } catch (error) {
                 console.error(error);
                 setModelSpeechGenerationStatus("bad");
+              }
+            }}
+          />
+          <StatusLog
+            status={llmStatus}
+            label="LLM Status"
+            testFunction={() => {
+              try {
+                sio.emit("model_test-llm", null, (status: boolean) => {
+                  setLlmStatus(status ? "good" : "bad");
+                });
+              } catch (error) {
+                console.error(error);
+                setLlmStatus("bad");
               }
             }}
           />

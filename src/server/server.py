@@ -16,6 +16,8 @@ def disconnect(sid):
 
 @sio.on("audio_record")
 async def audio_record(*args):
+    print("ping to audio record module")
+
     try:
         duration = int(args[1])
     except ValueError:
@@ -25,15 +27,20 @@ async def audio_record(*args):
 
     return True
 
+"""
 @sio.on("audio_recog")
-async def audio_recog(*args):
+async def audio_recog_x(*args):
+
+    print('ping to audio recognition module')
+
     try:
         s = await audio_recog()
 
         return s
     except Exception as e:
         return str(e)
-    
+"""
+        
 @sio.on("audio_gen")
 async def audio_genS(*args):
     try:

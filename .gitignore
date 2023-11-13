@@ -5,3 +5,5 @@ src/models/*/
 .cache/
 kobold/
 /**/__pycache__/
+src/cache/*.wav
+!src/cache/startup.wav

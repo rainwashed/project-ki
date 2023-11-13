@@ -17,3 +17,6 @@ pyaudio
 wave
 characterai
 websockets
+python-socketio[asyncio_client]
+pynput
+playsound

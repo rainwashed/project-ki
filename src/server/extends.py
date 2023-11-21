@@ -14,7 +14,7 @@ async def extension_test():
     return "test";
 
 @sio.on("llm-check_status")
-def check_status():
+def check_status(*args):
     status = ping()
     return status
 

@@ -55,7 +55,8 @@ def open_record_loop(callback):
         channels=channels,
         rate=fs,
         frames_per_buffer=chunk,
-        input=True
+        input=True,
+        start=False
     )
     audioFrames = []
 
@@ -67,6 +68,7 @@ def open_record_loop(callback):
 
         if key == keyboard.Key.space:
             print("[*] - Space is pressed down, beginning to capture audio.", end="\r")
+            stream.start_stream()
             data = stream.read(chunk)
             audioFrames.append(data)
 

@@ -27,7 +27,6 @@ async def audio_record(*args):
 
     return True
 
-"""
 @sio.on("audio_recog")
 async def audio_recog_x(*args):
 
@@ -39,7 +38,6 @@ async def audio_recog_x(*args):
         return s
     except Exception as e:
         return str(e)
-"""
         
 @sio.on("audio_gen")
 async def audio_genS(*args):
@@ -48,11 +46,10 @@ async def audio_genS(*args):
         print(args)
         await audio_gen(args[1])
 
-        with open("src/cache/model_gen.wav", "rb") as f:
-            return f.read()
+        return True
         
     except Exception as e:
-        return str(e)
+        return False
 
 # Model Tests
 @sio.on("model_test-audiorecog")

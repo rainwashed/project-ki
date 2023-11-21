@@ -1,11 +1,15 @@
+import torch
 from transformers import AutoProcessor, AutoModel
 import soundfile as sf
 from server.log_connection import log, LogTypes
 from time import time as now_time
 from audio.audio_recog import audio_recog
 
+device = "cuda:0" if torch.cuda.is_available() else "cpu"
 processor = AutoProcessor.from_pretrained("suno/bark-small")
 model = AutoModel.from_pretrained("suno/bark-small")
+
+print("[*] - Using device: {} for model.".format(device))
 
 voice_preset="v2/en_speaker_6"
 
@@ -19,7 +23,8 @@ async def audio_gen(text: str):
         text=[text],
         return_tensors="pt",
         voice_preset=voice_preset
-    )
+    ).to(device)
+    model.to(device)
 
     await log(__file__, f"Took {now_time() - start_time}s to process the text input.")
 
